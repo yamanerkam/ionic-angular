@@ -1,19 +1,42 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Home
+      WeatherApp
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
   <ion-item>
-    <ion-title>
-      {{cityName}}
-    </ion-title>
     <ion-label position="floating">Enter a City</ion-label>
     <ion-input [(ngModel)]="inputValue"></ion-input>
   </ion-item>
   <ion-button expand="full" (click)="handleButtonClick()">Submit</ion-button>
+
+
+  <div *ngIf="isData">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>{{ weatherData?.name }}</ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-item>
+          <ion-label>
+            <h2>Temperature: {{ weatherData?.temp }}°C</h2>
+            <p>{{ weatherData?.desc }}</p>
+          </ion-label>
+        </ion-item>
+        <ion-img [src]="'https://openweathermap.org/img/wn/' + weatherData?.icon + '@2x.png'"></ion-img>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <div *ngIf="error">
+    <p>{{errorMessage.getValue()}}</p>
+  </div>
+
+
+
 
 </ion-content>
